@@ -50,3 +50,15 @@ $data = '{
      "id": 2
  }';
 $response = Requests::post('https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/chaincode', $headers, $data);
+
+
+// REGISTER
+
+include('vendor/rmccue/requests/library/Requests.php');
+Requests::register_autoloader();
+$headers = array();
+$data = '{
+"enrollId": "admin",
+"enrollSecret": "19ad565b93"
+}';
+$response = Requests::post('https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/registrar', $headers, $data);
