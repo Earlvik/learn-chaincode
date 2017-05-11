@@ -1,25 +1,10 @@
-samples
+<?php
+// QUERY
 
-61c985e701312b259d16240f82fc812fc90236b520e35705ba542ec04cc5d7e70076e83412f9e9bbba6a23d58584ee0098be8be7560127e3a21df84c88335468
-
-
-Login request body
-
-{
-"enrollId": "admin",
-"enrollSecret": "19ad565b93"
-}
-
-RESPONSE
-
-{
-  "OK": "200",
-  "message": "some string"
-}
-
-Query request body
-
-{
+include('vendor/rmccue/requests/library/Requests.php');
+Requests::register_autoloader();
+$headers = array();
+$data = '{
      "jsonrpc": "2.0",
      "method": "query",
      "params": {
@@ -36,45 +21,15 @@ Query request body
          "secureContext": "admin"
      },
      "id": 2
- }
+ }';
+$response = Requests::post('https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/chaincode', $headers, $data);
 
- RESPONSE
+// INVOKE
 
- {
-  "jsonrpc": "2.0",
-  "result": {
-    "status": "OK",
-    "message": "current account value"
-  },
-  "id": 2
-}
-
-
-
-DEPLOY
-
- {
-     "jsonrpc": "2.0",
-     "method": "deploy",
-     "params": {
-         "type": 1,
-         "chaincodeID": {
-             "path": "https://github.com/Earlvik/learn-chaincode/start"
-         },
-         "ctorMsg": {
-             "function": "init",
-             "args": [
-                 "hi there"
-             ]
-         },
-         "secureContext": "admin"
-     },
-     "id": 1
- }
-
- INVOKE
-
- {
+include('vendor/rmccue/requests/library/Requests.php');
+Requests::register_autoloader();
+$headers = array();
+$data = '{
      "jsonrpc": "2.0",
      "method": "invoke",
      "params": {
@@ -85,12 +40,13 @@ DEPLOY
          "ctorMsg": {
              "function": "write",
              "args": [
-                 "furqan",
                  "viktor",
+                 "furqan",
                  "10"
              ]
          },
          "secureContext": "admin"
      },
-     "id": 3
- }
+     "id": 2
+ }';
+$response = Requests::post('https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/chaincode', $headers, $data);
