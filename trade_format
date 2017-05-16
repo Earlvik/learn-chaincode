@@ -1,0 +1,31 @@
+functions "read", "write" -- same as before
+
+function "list" 
+args: [
+  "user": "furqan"
+]
+
+response message: 
+[
+  {
+    "id": "134",
+    "name": "chair",
+    "price": "100",
+    "quantity": "36",
+    "owner": "furqan"
+  },
+    ...
+]
+
+function "trade"
+args: [
+  "buyer": "viktor",
+  "seller": "furqan",
+  "id": "134",
+  "quantity": "3"
+]
+
+checks: id is available, quantity is available, funds are sufficient
+
+response:
+OK or error
