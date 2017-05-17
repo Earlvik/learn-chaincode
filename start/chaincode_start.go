@@ -74,11 +74,11 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	var shopIndex []string
 	var boughtIndex []string
 
-	chair := `{"id":"001", "name": "chair", "price": 50, "quantity": 5}`
+	chair := `{"id":"001", "name": "chair", "price": 5, "quantity": 5}`
 	err = stub.PutState("001", []byte(chair))
 	shopIndex = append(shopIndex, "001")
 
-	phone := `{"id":"002", "name": "phone", "price": 99, "quantity": 15}`
+	phone := `{"id":"002", "name": "phone", "price": 15, "quantity": 15}`
 	err = stub.PutState("002", []byte(phone))
 	shopIndex = append(shopIndex, "002")
 
@@ -126,10 +126,69 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		}
 		return nil, nil
 	} else if function == "trade" {
-
+		var err error
 		if len(args) != 2 {
 			return nil, errors.New("Incorrect number of arguments. Expecting 2. Product id and quantity")
 		}
+
+		id := args[0]
+		quantity, err := strconv.Atoi(args[1])
+
+		storeAsBytes, err := stub.GetState(store)
+		boughtAsBytes, err := stub.GetState(bought)
+
+		var storeArray []string
+		var boughtArray []string
+
+		json.Unmarshal(storeAsBytes, storeArray)
+		json.Unmarshal(boughtAsBytes, boughtArray)
+
+		ids := id + "s"
+		if !in(storeArray, id) {
+			return nil, errors.New("Product not found")
+		}
+
+		productAsBytes, err := stub.GetState(id)
+		product := Product{}
+		json.Unmarshal(productAsBytes, product)
+		if (product.Quantity < quantity) {
+			return nil, errors.New("Not enough " + product.Name + " in store")
+		}
+
+		boughtProduct := Product{}
+		if (in(boughtArray, ids)) {
+			boughtProductAsBytes, _ := stub.GetState(ids)
+			json.Unmarshal(boughtProductAsBytes, boughtProduct)
+			boughtProduct.Quantity += quantity
+		} else {
+			json.Unmarshal(productAsBytes, boughtProduct)
+			boughtProduct.Id = ids
+			boughtProduct.Quantity = quantity
+			boughtArray = append(boughtArray, ids)
+			boughtAsBytes, err = json.Marshal(boughtArray)
+			err = stub.PutState(bought, boughtAsBytes)
+		}
+
+		product.Quantity -= quantity
+		productAsBytes, err = json.Marshal(product)
+		boughtProductAsBytes, err := json.Marshal(boughtProduct)
+		err = stub.PutState(id, productAsBytes)
+		err = stub.PutState(ids, boughtProductAsBytes)
+
+		senderValue, err := stub.GetState(buyer)
+		receiverValue, err := stub.GetState(seller)
+		senderInt, err := strconv.Atoi(string(senderValue[:]))
+		receiverInt, err := strconv.Atoi(string(receiverValue[:]))
+		amount := product.Price * quantity
+
+		err = stub.PutState(buyer, []byte(strconv.Itoa(senderInt - amount)))
+		err = stub.PutState(seller, []byte(strconv.Itoa(receiverInt + amount)))
+
+		if err != nil {
+			return nil, err
+		}
+	
+		return nil, nil
 	}
 	fmt.Println("invoke did not find func: " + function)					//error
 
@@ -193,4 +252,14 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Println("query did not find func: " + function)						//error
 
 	return nil, errors.New("Received unknown function query: " + function)
+}
+
+
+func in(arr []string, val string) bool {
+	for _, el := range arr {
+        if el == val {
+            return true
+        }
+    }
+    return false
 }
