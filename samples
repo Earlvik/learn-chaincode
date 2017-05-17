@@ -1,6 +1,6 @@
 samples
 
-24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89
+ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f
 
 
 Login request body
@@ -25,7 +25,7 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89"
+             "name": "ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f"
          },
          "ctorMsg": {
              "function": "read",
@@ -44,7 +44,7 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89"
+             "name": "ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f"
          },
          "ctorMsg": {
              "function": "list",
@@ -64,6 +64,15 @@ Query request body
   "result": {
     "status": "OK",
     "message": "100"
+  },
+  "id": 2
+}
+
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "status": "OK",
+    "message": "[\"{\\\"id\\\":\\\"001\\\",\\\"name\\\":\\\"chair\\\",\\\"price\\\":5,\\\"quantity\\\":0}\",\"{\\\"id\\\":\\\"002\\\", \\\"name\\\": \\\"phone\\\", \\\"price\\\": 15, \\\"quantity\\\": 15}\"]"
   },
   "id": 2
 }
@@ -99,7 +108,7 @@ DEPLOY
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89"
+             "name": "ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f"
          },
          "ctorMsg": {
              "function": "trade",
