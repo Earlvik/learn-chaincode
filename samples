@@ -1,6 +1,6 @@
 samples
 
-0e6740f84961c3769cfee3c4c8dc5bce961cd249b95cf567d1dd46da985e7c9f5fa37e15e0ddc97c28892aad1fa5c28b91b2345545e244edec3cb08c987d9cb5
+c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14
 
 
 Login request body
@@ -25,7 +25,7 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "0e6740f84961c3769cfee3c4c8dc5bce961cd249b95cf567d1dd46da985e7c9f5fa37e15e0ddc97c28892aad1fa5c28b91b2345545e244edec3cb08c987d9cb5"
+             "name": "c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14"
          },
          "ctorMsg": {
              "function": "read",
@@ -44,7 +44,7 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "0e6740f84961c3769cfee3c4c8dc5bce961cd249b95cf567d1dd46da985e7c9f5fa37e15e0ddc97c28892aad1fa5c28b91b2345545e244edec3cb08c987d9cb5"
+             "name": "c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14"
          },
          "ctorMsg": {
              "function": "list",
@@ -99,14 +99,13 @@ DEPLOY
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "0e6740f84961c3769cfee3c4c8dc5bce961cd249b95cf567d1dd46da985e7c9f5fa37e15e0ddc97c28892aad1fa5c28b91b2345545e244edec3cb08c987d9cb5"
+             "name": "c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14"
          },
          "ctorMsg": {
-             "function": "write",
+             "function": "trade",
              "args": [
-                 "furqan",
-                 "viktor",
-                 "10"
+                 "001",
+                 "1"
              ]
          },
          "secureContext": "admin"
