@@ -168,7 +168,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 			var products []string
 			json.Unmarshal(valAsbytes, &products)
 			for _, product := range products {
-				response = append(response, product)
+				value, err := stub.GetState(product)
+				response = append(response, value)
 			}
 			responseAsBytes, _ := json.Marshal(response)
 			return responseAsBytes, nil
@@ -182,7 +183,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 			var products []string
 			json.Unmarshal(valAsbytes, &products)
 			for _, product := range products {
-				response = append(response, product)
+				value, err := stub.GetState(product)
+				response = append(response, value)
 			}
 			responseAsBytes, _ := json.Marshal(response)
 			return responseAsBytes, nil
