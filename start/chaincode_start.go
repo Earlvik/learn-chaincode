@@ -125,6 +125,12 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 			return nil, err
 		}
 		return nil, nil
+	} else if function == "trade" {
+		var err error
+
+		if len(args) != 2 {
+			return nil, errors.New("Incorrect number of arguments. Expecting 2. Product id and quantity")
+		}
 	}
 	fmt.Println("invoke did not find func: " + function)					//error
 
@@ -159,7 +165,14 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 				jsonResp = "{\"Error\":\"Failed to get state for " + key + "\"}"
 				return nil, errors.New(jsonResp)
 			}
-			return valAsbytes, nil
+			var response []string
+			var products []string
+			json.Unmarshal(valAsbytes, &products)
+			for product := products {
+				response = append(response, product)
+			}
+			responseAsBytes, _ := json.Marshal(response)
+			return responseAsBytes, nil
 		} else if (key == seller) {
 			valAsbytes, err := stub.GetState(store)
 			if err != nil {
