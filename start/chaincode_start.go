@@ -20,6 +20,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
+	"encoding/json"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
@@ -29,6 +30,19 @@ type SimpleChaincode struct {
 
 var viktor = "viktor"
 var furqan = "furqan"
+var seller = "viktor"
+var buyer = "furqan"
+
+var store = "store_index"
+var bought = "bought_index"
+
+type Product struct {
+	Id string `json:"id"`
+	Name string `json:"name"`
+	Price int `json:"price"`
+	Quantity int `json:"quantity"`
+}
+
 
 // ============================================================================================================================
 // Main
@@ -56,6 +70,23 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	if err != nil {
 		return nil, err
 	}
+
+	var shopIndex []string
+	var boughtIndex []string
+
+	chair := `{"id":"001", "name": "chair", "price": 50, "quantity": 5}`
+	err = stub.PutState("001", []byte(chair))
+	shopIndex = append(shopIndex, "001")
+
+	phone := `{"id":"002", "name": "phone", "price": 99, "quantity": 15}`
+	err = stub.PutState("002", []byte(phone))
+	shopIndex = append(shopIndex, "002")
+
+	shopAsBytes, _ := json.Marshal(shopIndex)
+	err = stub.PutState(store, shopAsBytes)
+	boughtAsBytes, _ := json.Marshal(boughtIndex)
+	err = stub.PutState(bought, boughtAsBytes) 
+
 	return nil, nil
 }
 
@@ -117,6 +148,26 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 			return nil, errors.New(jsonResp)
 		}
 		return valAsbytes, nil
+	} else if function == "list" {
+		if len(args) != 1 {
+			return nil, errors.New("Incorrect number of arguments. Expecting name of the user to query")
+		}
+		key = args[0]
+		if (key == buyer) {
+			valAsbytes, err := stub.GetState(bought)
+			if err != nil {
+				jsonResp = "{\"Error\":\"Failed to get state for " + key + "\"}"
+				return nil, errors.New(jsonResp)
+			}
+			return valAsbytes, nil
+		} else if (key == seller) {
+			valAsbytes, err := stub.GetState(store)
+			if err != nil {
+				jsonResp = "{\"Error\":\"Failed to get state for " + key + "\"}"
+				return nil, errors.New(jsonResp)
+			}
+			return valAsbytes, nil
+		}	
 	}
 	fmt.Println("query did not find func: " + function)						//error
 
