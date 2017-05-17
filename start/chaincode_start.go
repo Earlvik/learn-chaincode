@@ -140,8 +140,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		var storeArray []string
 		var boughtArray []string
 
-		json.Unmarshal(storeAsBytes, storeArray)
-		json.Unmarshal(boughtAsBytes, boughtArray)
+		json.Unmarshal(storeAsBytes, &storeArray)
+		json.Unmarshal(boughtAsBytes, &boughtArray)
 
 		ids := id + "s"
 		if !in(storeArray, id) {
@@ -150,7 +150,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 
 		productAsBytes, err := stub.GetState(id)
 		product := Product{}
-		json.Unmarshal(productAsBytes, product)
+		json.Unmarshal(productAsBytes, &product)
 		if (product.Quantity < quantity) {
 			return nil, errors.New("Not enough " + product.Name + " in store")
 		}
@@ -158,10 +158,10 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		boughtProduct := Product{}
 		if (in(boughtArray, ids)) {
 			boughtProductAsBytes, _ := stub.GetState(ids)
-			json.Unmarshal(boughtProductAsBytes, boughtProduct)
+			json.Unmarshal(boughtProductAsBytes, &boughtProduct)
 			boughtProduct.Quantity += quantity
 		} else {
-			json.Unmarshal(productAsBytes, boughtProduct)
+			json.Unmarshal(productAsBytes, &boughtProduct)
 			boughtProduct.Id = ids
 			boughtProduct.Quantity = quantity
 			boughtArray = append(boughtArray, ids)

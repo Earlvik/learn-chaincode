@@ -1,6 +1,6 @@
 samples
 
-c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14
+24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89
 
 
 Login request body
@@ -25,7 +25,7 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14"
+             "name": "24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89"
          },
          "ctorMsg": {
              "function": "read",
@@ -44,7 +44,7 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14"
+             "name": "24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89"
          },
          "ctorMsg": {
              "function": "list",
@@ -99,13 +99,13 @@ DEPLOY
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "c7620ab21ddb9749b4f35bd9b61b86d687cfd76d38701c9c8344d45cfccbe002e2feeed8e1bb3d33de324f1769679b3df7a9705d0380a00d738fc7beac356b14"
+             "name": "24ddd2554dc35866b1490092c75f75efa52c81d778cde68deba18bf4ad9f1325a203031165c62f324351e87ccefdd6ec854f11234769dfc5750fded704af8e89"
          },
          "ctorMsg": {
              "function": "trade",
              "args": [
                  "001",
-                 "1"
+                 "5"
              ]
          },
          "secureContext": "admin"
