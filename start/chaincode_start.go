@@ -126,7 +126,6 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		}
 		return nil, nil
 	} else if function == "trade" {
-		var err error
 
 		if len(args) != 2 {
 			return nil, errors.New("Incorrect number of arguments. Expecting 2. Product id and quantity")
@@ -168,7 +167,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 			var response []string
 			var products []string
 			json.Unmarshal(valAsbytes, &products)
-			for product := products {
+			for _, product := range products {
 				response = append(response, product)
 			}
 			responseAsBytes, _ := json.Marshal(response)
