@@ -61,12 +61,12 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	}
 	var err error
 
-	err = stub.PutState(viktor, []byte(strconv.Itoa(100)))
+	err = stub.PutState(viktor, []byte(strconv.Itoa(1000)))
 	if err != nil {
 		return nil, err
 	}
 
-	err = stub.PutState(furqan, []byte(strconv.Itoa(100)))
+	err = stub.PutState(furqan, []byte(strconv.Itoa(1000)))
 	if err != nil {
 		return nil, err
 	}
