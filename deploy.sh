@@ -15,7 +15,7 @@ git commit -m "Deploy $1 $DATE"
 git push
 echo -e "${ORANGE}Deploying to Bluemix${NC}"
 
-ID=$(curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" -d "{
+ID=$(curl -s -X POST --header "Content-Type: application/json" --header "Accept: application/json" -d "{
      \"jsonrpc\": \"2.0\",
      \"method\": \"deploy\",
      \"params\": {

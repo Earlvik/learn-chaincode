@@ -25,13 +25,11 @@ Query request body
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f"
+             "name": "d693dcdf3860f861cbf75273b8245c598832015787ea7b3192dcd4fde226a96f3c3a1578f31892c31beadc4a72a2ce7ee56bad91790c29e518604e35762580b3"
          },
          "ctorMsg": {
-             "function": "read",
-             "args": [
-                 "viktor"
-             ]
+             "function": "price",
+             "args": []
          },
          "secureContext": "admin"
      },
@@ -108,16 +106,34 @@ DEPLOY
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f"
+             "name": "ec39946add9d317db5835b096d395b477fde204a9ff0891b48bb090ffe1ee47217d9d98288864f8a20fc5461e7c15bb8dc70f248c0e17073c3e338d31bb4d112"
          },
          "ctorMsg": {
-             "function": "trade",
+             "function": "pay",
              "args": [
-                 "001",
-                 "5"
+                 "30"
              ]
          },
          "secureContext": "admin"
      },
      "id": 3
  }
+
+ curl -X POST --header "Content-Type: application/json" --header "Accept: application/json" -d "{
+     \"jsonrpc\": \"2.0\",
+     \"method\": \"deploy\",
+     \"params\": {
+         \"type\": 1,
+         \"chaincodeID\": {
+             \"path\": \"https://github.com/Earlvik/learn-chaincode/deploy\"
+         },
+         \"ctorMsg\": {
+             \"function\": \"init\",
+             \"args\": [
+                 \"hi there\"
+             ]
+         },
+         \"secureContext\": \"admin\"
+     },
+     \"id\": 1
+ }" "https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/chaincode"
