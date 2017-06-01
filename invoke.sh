@@ -30,7 +30,7 @@ RESULT=$(curl -s -X POST --header "Content-Type: application/json" --header "Acc
          \"secureContext\": \"admin\"
      },
      \"id\": 123
- }" "https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/chaincode")
+ }" "https://1acda275b31041d89efd8a04b9bac2ea-vp0.us.blockchain.ibm.com:5004/chaincode")
  ST=$(echo $RESULT | jq -r '.result.status')
  MSG=$(echo $RESULT | jq -r '.result.message')
  echo -e "${ORANGE}Status: $ST ${NC}"

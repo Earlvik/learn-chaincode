@@ -32,7 +32,7 @@ ID=$(curl -s -X POST --header "Content-Type: application/json" --header "Accept:
          \"secureContext\": \"admin\"
      },
      \"id\": 1
- }" "https://bf2ecd302ef6404abcf3ad797a0eefaa-vp0.us.blockchain.ibm.com:5002/chaincode" | jq -r '.result.message')
+ }" "https://1acda275b31041d89efd8a04b9bac2ea-vp0.us.blockchain.ibm.com:5004/chaincode" | jq -r '.result.message')
 echo "$DATE $1 $ID" >> deploylog.txt
 git add -A
 git commit --amend -m "Deploy $1 $DATE"
