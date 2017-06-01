@@ -2,12 +2,14 @@ samples
 
 ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f
 
+https://1acda275b31041d89efd8a04b9bac2ea-vp0.us.blockchain.ibm.com:5004
+
 
 Login request body
 
 {
 "enrollId": "admin",
-"enrollSecret": "19ad565b93"
+"enrollSecret": "dfb03c0214"
 }
 
 RESPONSE
@@ -106,11 +108,13 @@ DEPLOY
      "params": {
          "type": 1,
          "chaincodeID": {
-             "name": "ec39946add9d317db5835b096d395b477fde204a9ff0891b48bb090ffe1ee47217d9d98288864f8a20fc5461e7c15bb8dc70f248c0e17073c3e338d31bb4d112"
+             "name": "ff7c0eb73853755c85ca5af7f1ced1e4f90cdec0c0670f3d7be005e62c49d9dbdb40c9b330aacfd594b921c5d120dab606d9ee60aa808a78158aea1389eb527f"
          },
          "ctorMsg": {
-             "function": "pay",
+             "function": "write",
              "args": [
+                 "viktor",
+                 "furqan",
                  "30"
              ]
          },
