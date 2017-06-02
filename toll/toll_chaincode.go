@@ -69,7 +69,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		var err error
 
 		if len(args) != 1 {
-			return nil, errors.New("Incorrect number of arguments. Expecting 1 - payment sum")
+			return []byte("Argument error"), errors.New("Incorrect number of arguments. Expecting 1 - payment sum")
 		}
 
 		amount, err := strconv.Atoi(args[0])

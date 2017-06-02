@@ -3,3 +3,5 @@ echo "DATE       TIME     NAME                            CHAINCODE ID" > deploy
 ./deploy.sh car
 ./deploy.sh wash
 ./deploy.sh uber
+./deploy.sh toll
+./deploy.sh park
