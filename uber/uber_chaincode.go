@@ -81,6 +81,10 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 			return nil, err
 		}
 
+		if amount > accountInt {
+			return "Insufficient funds", errors.New("Insufficient funds")
+		}
+
 		err = stub.PutState(account, []byte(strconv.Itoa(accountInt - amount)))
 
 		if err != nil {
