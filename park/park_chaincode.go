@@ -89,7 +89,22 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 			return nil, err
 		}
 		return nil, nil
-	} 
+	} else if function == "toggle" {
+		var err error
+		availability, err := stub.GetState(avail)
+		availStr := string(availability[:])
+		if (availStr == "true") {
+			err = stub.PutState(avail, []byte("false"))
+		} else {
+			err = stub.PutState(avail, []byte("true"))
+		}
+
+		if err != nil {
+			return nil, err
+		}
+
+		return nil, nil
+	}
 	fmt.Println("invoke did not find func: " + function)					//error
 
 	return nil, errors.New("Received unknown function invocation: " + function)
