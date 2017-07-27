@@ -28,6 +28,7 @@ type SimpleChaincode struct {
 }
 
 var account = "car"
+var avail = "car_avail"
 
 
 // ============================================================================================================================
@@ -48,6 +49,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	var err error
 
 	err = stub.PutState(account, []byte(strconv.Itoa(5000)))
+	err = stub.PutState(avail, []byte("true"))
 	if err != nil {
 		return nil, err
 	}
@@ -110,6 +112,20 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 			return nil, err
 		}
 		return nil, nil
+	} else if function == "acquire" {
+		var err error
+		err = stub.PutState(avail, []byte("false"))
+		if err != nil {
+			return nil, err
+		}
+		return nil, nil
+	} else if function == "release" {
+		var err error
+		err = stub.PutState(avail, []byte("true"))
+		if err != nil {
+			return nil, err
+		}
+		return nil, nil
 	} 
 	fmt.Println("invoke did not find func: " + function)					//error
 
@@ -126,6 +142,13 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 		valAsbytes, err := stub.GetState(account)
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + account + "\"}"
+			return nil, errors.New(jsonResp)
+		}
+		return valAsbytes, nil
+	} else if function == "available" {
+		valAsbytes, err := stub.GetState(avail)
+		if err != nil {
+			jsonResp = "{\"Error\":\"Failed to get state for " + avail + "\"}"
 			return nil, errors.New(jsonResp)
 		}
 		return valAsbytes, nil
